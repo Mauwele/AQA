@@ -1,4 +1,6 @@
 package Lesson_2;
+
+import java.util.Arrays;
 import java.util.Scanner;
 public class MainLesson2 {
 
@@ -34,7 +36,7 @@ public class MainLesson2 {
             System.out.println("\nКрасный");
         }
         else {
-            if (value>0 && value<=100) {
+            if (value<=100) {
                 System.out.println("\nЖелтый");
             }
             else {
@@ -62,9 +64,15 @@ public class MainLesson2 {
     /* 5. Напишите метод, принимающий на вход два целых числа и проверяющий, что их сумма лежит в пределах от 10 до 20 (включительно),
 если да – вернуть true, в противном случае – false.*/
 
-    public static void sum10to20() {
+    public static boolean sum10to20(int a, int b) {
 
-        int a,b;
+        return  (a+b>=10) && (a+b<=20);
+
+    }
+
+    public static void enterNumbers() {
+
+        int a, b;
 
         Scanner sum = new Scanner(System.in);
         System.out.print("\nВведите целое число a: ");
@@ -73,64 +81,66 @@ public class MainLesson2 {
         System.out.print("Введите целое число b: ");
         b = sum.nextInt();
 
-        if (a+b>=10 && a+b<=20) {
-            boolean C = true;
-            System.out.println("\n"+C);
-        }
-        else {
-            boolean C = false;
-            System.out.println("\n"+C);
-        }
+        boolean result = sum10to20(a,b);
 
+        System.out.println("\n" + result);
     }
 
     /* 6. Напишите метод, которому в качестве параметра передается целое число, метод должен напечатать в консоль,
 положительное ли число передали или отрицательное. Замечание: ноль считаем положительным числом.*/
 
-    public static void positiveOrNegative() {
+    public static void positiveOrNegative(int a) {
+
+        if (a >= 0) {
+            System.out.println("\nЧисло положительное");
+        } else {
+            System.out.println("\nЧисло отрицательное");
+        }
+    }
+
+    public static void enterOneNumber () {
 
         int a;
-
         Scanner scan = new Scanner(System.in);
         System.out.print("\nВведите целое число: ");
         a = scan.nextInt();
-
-        if (a>=0) {
-            System.out.println("\nЧисло положительное");
-        }
-        else {
-            System.out.println("\nЧисло отрицательное");
-        }
-
+        positiveOrNegative (a);
     }
 
     /* 7. Напишите метод, которому в качестве параметра передается целое число.
 Метод должен вернуть true, если число отрицательное, и вернуть false если положительное.
 Замечание: ноль считаем положительным числом.*/
 
+    public static boolean isNumberNegative(int a) {
+
+        return  (a < 0);
+    }
+
     public static void positiveOrNegativeTrueOrFalse() {
 
         int a;
 
-        Scanner scan = new Scanner(System.in);
+        Scanner sum = new Scanner(System.in);
         System.out.print("\nВведите целое число: ");
-        a = scan.nextInt();
+        a = sum.nextInt();
 
-        if (a>=0) {
-            boolean c = false;
-            System.out.println("\n" + c);
-        }
-        else {
-            boolean c = true;
-            System.out.println("\n" + c);
-        }
+        boolean result = isNumberNegative(a);
+
+        System.out.println("\n" + result);
 
     }
 
     /* 8. Напишите метод, которому в качестве аргументов передается строка и число,
 метод должен отпечатать в консоль указанную строку, указанное количество раз;*/
 
-    public static void stringXtimes() {
+    public static void stringXtimes(String text, int times) {
+
+        for (int i = 0; i < times; i++) {
+            System.out.println(text);
+        }
+    }
+
+    public static void enterStringAndTimes () {
 
         int a;
 
@@ -147,25 +157,21 @@ public class MainLesson2 {
         scan.nextLine();
 
         System.out.print("\nВведите строку: ");
-
         String stringText = scan.nextLine();
 
-        for (int i = 0; i < a; i++) {
-            System.out.println(stringText);
-        }
+        stringXtimes(stringText, a);
 
     }
 
     /* 9. Напишите метод, который определяет, является ли год високосным, и возвращает boolean (високосный - true, не високосный - false).
 Каждый 4-й год является високосным, кроме каждого 100-го, при этом каждый 400-й – високосный.*/
 
-    public static boolean checkYear(int year) {
+    public static boolean isLeapYear(int year) {
         if (year % 400 == 0) return true;
         if (year % 100 == 0) return false;
         if (year % 4 == 0) return true;
         return false;
     }
-
 
     public static void checkYearFromUser() {
 
@@ -180,13 +186,8 @@ public class MainLesson2 {
             return;
         }
 
-        boolean result = checkYear(year);
-
-        if (result) {
-            System.out.println("\nВисокосный");
-        } else {
-            System.out.println("\nНе високосный");
-        }
+        boolean result = isLeapYear(year);
+        System.out.println("\n" + result);
     }
 
     /* 10. Задать целочисленный массив, состоящий из элементов 0 и 1.
@@ -202,7 +203,7 @@ public class MainLesson2 {
                 nums[i] = 0;
                 System.out.print(nums[i]);
             }
-            else if (nums[i] == 0){
+            else {
                 nums[i] = 1;
                 System.out.print(nums[i]);
             }
@@ -265,12 +266,20 @@ public class MainLesson2 {
     /* 14. Написать метод, принимающий на вход два аргумента: len и initialValue,
 и возвращающий одномерный массив типа int длиной len, каждая ячейка которого равна initialValue.*/
 
-    public static void matrixLen() {
-        int len, initialValue;
+    public static int[] matrixLen(int len, int initialValue) {
+        int[] nums = new int[len];
+        for (int i = 0; i < len; i++) {
+            nums[i] = initialValue;
+        }
+        return nums;
+    }
+
+    public static void enterTheMatrix() {
+
         Scanner scan = new Scanner(System.in);
 
         System.out.print("Введите длину массива: ");
-        len = scan.nextInt();
+        int len = scan.nextInt();
         if (len <= 0) {
             System.out.println("Длинна должна быть положительным числом!");
             return;
@@ -278,28 +287,27 @@ public class MainLesson2 {
         int []nums = new int[len] ;
 
         System.out.print("Введите значение ячеек: ");
-        initialValue = scan.nextInt();
+        int initialValue = scan.nextInt();
 
-        for (int i = 0; i < nums.length; i++) {
-            nums[i] = initialValue;
-            System.out.print(nums[i] + " ");
-        }
+        int[] resultArray = matrixLen(len, initialValue);
+
+        System.out.println("\n" + Arrays.toString(resultArray));
     }
 
     public static void main(String[] args) {
-        printThreeWords();
-//        checkSumSign();
-//        printColor();
-//        compareNumbers();
-//        sum10to20();
-//        positiveOrNegative();
-//        positiveOrNegativeTrueOrFalse();
-//        stringXtimes();
-//        checkYearFromUser();
-//        masive();
-//        masive100();
-//        masive6on2();
-//        matrix();
-//        matrixLen();
+//     1.  printThreeWords();
+//     2.  checkSumSign();
+//     3.  printColor();
+//     4.  compareNumbers();
+//     5.  enterNumbers();
+//     6.  enterOneNumber();
+//     7.  positiveOrNegativeTrueOrFalse();
+//     8.  enterStringAndTimes();
+//     9.  checkYearFromUser();
+//     10. masive();
+//     11. masive100();
+//     12. masive6on2();
+//     13. matrix();
+//     14. enterTheMatrix();
     }
 }
