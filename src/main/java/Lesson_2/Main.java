@@ -2,7 +2,7 @@ package Lesson_2;
 
 import java.util.Arrays;
 import java.util.Scanner;
-public class MainLesson2 {
+public class Main {
 
     // 1.Создайте метод printThreeWords(), который при вызове должен отпечатать в столбец три слова: Orange, Banana, Apple//
 
