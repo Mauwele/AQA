@@ -24,11 +24,11 @@ public class Product {
     }
 
     public void showProductInfo() {
-        System.out.println("\nНазвание: " + name);
-        System.out.println("Дата производства: " + productionDate.toString());
-        System.out.println("Производитель: " + manufacturer);
-        System.out.println("Страна происхождения: " + countryOfOrigin);
-        System.out.println("Цена: " + price + " $");
-        System.out.println("Состояние бронирования: " + statusBooking);
+        System.out.println("\nНазвание: " + name
+                + "\nДата производства: " + productionDate
+                + "\nПроизводитель: " + manufacturer
+                + "\nСтрана происхождения: " + countryOfOrigin
+                + "\nЦена: " + price + " $"
+                + "\nСостояние бронирования покупателем: " + statusBooking);
     }
 }
